@@ -11,3 +11,15 @@ C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\obj\x86\Debug\Mi
 C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\obj\x86\Debug\gravWell.exe
 C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\obj\x86\Debug\gravWell.pdb
 C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\white.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Crate.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Floor.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\inara.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\shipAnimation.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\jasperrun.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\white.xnb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\gravWell.exe
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\gravWell.pdb
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\obj\x86\Debug\gravWell.exe
+E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\obj\x86\Debug\gravWell.pdb

@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Crate.xnb</Output>
-      <Time>2012-10-15T12:51:31.514+02:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Crate.xnb</Output>
+      <Time>2012-11-30T19:01:50.6594362+01:00</Time>
     </Item>
     <Item>
       <Source>Floor.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Floor.xnb</Output>
-      <Time>2012-10-15T12:51:31.514+02:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\Floor.xnb</Output>
+      <Time>2012-11-30T19:01:50.6594362+01:00</Time>
     </Item>
     <Item>
       <Source>inara.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\inara.xnb</Output>
-      <Time>2012-10-15T12:51:31.533+02:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\inara.xnb</Output>
+      <Time>2012-11-30T19:01:50.6844376+01:00</Time>
     </Item>
     <Item>
       <Source>shipAnimation.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\shipAnimation.xnb</Output>
-      <Time>2012-10-15T12:51:31.554+02:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\shipAnimation.xnb</Output>
+      <Time>2012-11-30T19:01:50.6884378+01:00</Time>
     </Item>
     <Item>
       <Source>jasperrun.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\jasperrun.xnb</Output>
-      <Time>2012-11-10T14:24:03.334+01:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\jasperrun.xnb</Output>
+      <Time>2012-11-30T19:01:50.6844376+01:00</Time>
     </Item>
     <Item>
       <Source>white.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\white.xnb</Output>
-      <Time>2012-11-10T14:30:18.819+01:00</Time>
+      <Output>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\white.xnb</Output>
+      <Time>2012-11-30T19:01:50.6894379+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -61,39 +61,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWellContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWellContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Marin\Documents\GitHub\Main\gravWell\gravWell\gravWell\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWellContent\</RootDirectory>
+      <LoggerRootDirectory>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\</LoggerRootDirectory>
+      <IntermediateDirectory>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWellContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>E:\Users\PRo\Documents\GitHub\goodSAP\gravWell\gravWell\gravWell\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Key>E:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-07-16T00:20:14.057+02:00</Value>
+        <Key>E:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-10-05T20:57:02.884821+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

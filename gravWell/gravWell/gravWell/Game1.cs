@@ -14,7 +14,7 @@ using Shooter;
 using Shooter.PhysicsObjects;
 using gravWell.camera;
 
-//Mehehehe
+
 namespace Farseer331_Setup
 {
     /// <summary>
@@ -34,6 +34,10 @@ namespace Farseer331_Setup
         DrawablePhysicsObject player;
         Texture2D floorTexture;
         Texture2D white;
+
+        //Player Variables
+        Vector2 playerSpeed = new Vector2(0.1f, 0.0f);
+        float playerFriction = 0.3f;
 
         KeyboardState prevKeyboardState;
         Random random;
@@ -122,7 +126,7 @@ namespace Farseer331_Setup
             player.Position = new Vector2(200.0f, 100.0f);
         //    player.body.body.Rotation = 90;
             player.body.BodyType = BodyType.Dynamic;
-            
+            player.body.Friction = playerFriction;
            
             
             crateList = new List<DrawablePhysicsObject>();
@@ -189,12 +193,21 @@ namespace Farseer331_Setup
                 this.Exit();
 
             if (keyboardState.IsKeyDown(Keys.Right)){
-                player.body.LinearVelocity += new Vector2(0.1f, 0.0f);
+                player.body.LinearVelocity += playerSpeed;
                 playerObj.Facing = "right";
+
+                if (player.body.LinearVelocity.X < 0)
+                {
+                    player.body.LinearVelocity += playerSpeed * 2;
+                }
             }
             if (keyboardState.IsKeyDown(Keys.Left)){
-                player.body.LinearVelocity += new Vector2(-0.1f, 0.0f);
+                player.body.LinearVelocity -= playerSpeed;
                 playerObj.Facing = "left";
+                if (player.body.LinearVelocity.X > 0)
+                {
+                    player.body.LinearVelocity -= playerSpeed * 2;
+                }
             }
 
             
