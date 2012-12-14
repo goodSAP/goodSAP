@@ -9,7 +9,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
+using FarseerPhysics.Dynamics.Joints;
 using FarseerPhysics.Factories;
+using FarseerPhysics.Collision;
 using Shooter;
 using Shooter.PhysicsObjects;
 using gravWell.camera;
@@ -40,8 +43,13 @@ namespace Farseer331_Setup
         float playerFriction = 0.5f;
         Vector2 maxVelocity = new Vector2(5.0f, 0.0f);
         Boolean jumpAvailible = true;
-        Vector2 playerJumpPower = new Vector2(0.0f, 5.0f);
+        Vector2 playerJumpPower = new Vector2(0.0f, 5.5f);
         float prevPlayerY;
+
+        private bool MyOnCollision(Body self, Body other, Contact c)
+        {
+            return true;
+        }
 
         KeyboardState prevKeyboardState;
         Random random;
@@ -91,6 +99,9 @@ namespace Farseer331_Setup
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             random = new Random();
+
+            Body myBody = BodyFactory.CreateCircle(world, 0.5f, 1);
+            myBody.OnCollision += MyOnCollision;
 
 
 
@@ -192,6 +203,8 @@ namespace Farseer331_Setup
             playerObj.Position.Y = player.Position.Y;
             playerObj.Update(gameTime);
             KeyboardState keyboardState = Keyboard.GetState();
+            
+            
 
             // Allows the game to exit
 
