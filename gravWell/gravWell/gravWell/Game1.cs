@@ -37,7 +37,11 @@ namespace Farseer331_Setup
 
         //Player Variables
         Vector2 playerSpeed = new Vector2(0.1f, 0.0f);
-        float playerFriction = 0.3f;
+        float playerFriction = 0.5f;
+        Vector2 maxVelocity = new Vector2(5.0f, 0.0f);
+        Boolean jumpAvailible = true;
+        Vector2 playerJumpPower = new Vector2(0.0f, 5.0f);
+        float prevPlayerY;
 
         KeyboardState prevKeyboardState;
         Random random;
@@ -188,29 +192,55 @@ namespace Farseer331_Setup
             playerObj.Position.Y = player.Position.Y;
             playerObj.Update(gameTime);
             KeyboardState keyboardState = Keyboard.GetState();
+
             // Allows the game to exit
+
+            Console.WriteLine(player.body.Position.Y);
+
             if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) || (keyboardState.IsKeyDown(Keys.Escape)))
                 this.Exit();
 
-            if (keyboardState.IsKeyDown(Keys.Right)){
-                player.body.LinearVelocity += playerSpeed;
-                playerObj.Facing = "right";
+            if (player.body.LinearVelocity.X < maxVelocity.X)
+            {
 
-                if (player.body.LinearVelocity.X < 0)
+                if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    player.body.LinearVelocity += playerSpeed * 2;
+                    player.body.LinearVelocity += playerSpeed;
+                    playerObj.Facing = "right";
+
+                    if (player.body.LinearVelocity.X < 0)
+                    {
+                        player.body.LinearVelocity += playerSpeed * 4;
+                    }
                 }
             }
-            if (keyboardState.IsKeyDown(Keys.Left)){
-                player.body.LinearVelocity -= playerSpeed;
-                playerObj.Facing = "left";
-                if (player.body.LinearVelocity.X > 0)
+            if (player.body.LinearVelocity.X > -maxVelocity.X)
+            {
+                if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    player.body.LinearVelocity -= playerSpeed * 2;
+                    player.body.LinearVelocity -= playerSpeed;
+                    playerObj.Facing = "left";
+
+                    if (player.body.LinearVelocity.X > 0)
+                    {
+                        player.body.LinearVelocity -= playerSpeed * 4;
+                    }
                 }
             }
 
-            
+            if(player.body.Position.Y == prevPlayerY)
+            {
+                jumpAvailible = true;
+            }
+
+            if (jumpAvailible == true)
+            {
+                if (keyboardState.IsKeyDown(Keys.Up))
+                {
+                    player.body.LinearVelocity -= playerJumpPower;
+                    jumpAvailible = false;
+                }
+            }
             if (keyboardState.IsKeyDown(Keys.Space)&& (!prevKeyboardState.IsKeyDown(Keys.Space)))
             {
                 player.body.LinearVelocity *= new Vector2(-1.0f, 0.0f);
@@ -265,6 +295,7 @@ namespace Farseer331_Setup
             }
 
             prevKeyboardState = keyboardState;
+            prevPlayerY = player.body.Position.Y;
 
 
             if ((playerObj.Position.X - cam._pos.X) > graphics.GraphicsDevice.Viewport.Width * 0.40)
