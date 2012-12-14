@@ -213,7 +213,7 @@ namespace Farseer331_Setup
             
             if (keyboardState.IsKeyDown(Keys.Space)&& (!prevKeyboardState.IsKeyDown(Keys.Space)))
             {
-                player.body.LinearVelocity *= new Vector2(-1.0f, 0.0f);
+                player.body.LinearVelocity += new Vector2(0.0f, -5.0f);
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
@@ -222,6 +222,8 @@ namespace Farseer331_Setup
                 world.Gravity.X = 9.8f;
                 world.Gravity.Y = 0.0f;
             }
+
+            
 
             if (keyboardState.IsKeyDown(Keys.D))
             {
