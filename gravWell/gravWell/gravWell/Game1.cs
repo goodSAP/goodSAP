@@ -13,7 +13,10 @@ using FarseerPhysics.Factories;
 using Shooter;
 using Shooter.PhysicsObjects;
 using gravWell.camera;
-
+using FarseerPhysics.Collision;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Dynamics.Contacts;
 
 namespace Farseer331_Setup
 {
@@ -25,19 +28,29 @@ namespace Farseer331_Setup
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
+        EdgeShape edge;
         
         World world;
+        List<DrawablePhysicsObject> florList;
         List<DrawablePhysicsObject> crateList;
+        List<DrawablePhysicsObject> boxList;
         DrawablePhysicsObject floor;
         DrawablePhysicsObject platform;
         DrawablePhysicsObject wall;
         DrawablePhysicsObject player;
         Texture2D floorTexture;
         Texture2D white;
+        
 
+        
         //Player Variables
         Vector2 playerSpeed = new Vector2(0.1f, 0.0f);
-        float playerFriction = 0.3f;
+        float playerFriction = 0.5f;
+        Vector2 maxVelocity = new Vector2(5.0f, 0.0f);
+        Boolean jumpAvailible = true;
+        Vector2 playerJumpPower = new Vector2(0.0f, 5.0f);
+        float prevPlayerY;
 
         KeyboardState prevKeyboardState;
         Random random;
@@ -49,6 +62,19 @@ namespace Farseer331_Setup
         public const float unitToPixel = 100.0f;
         public const float pixelToUnit = 1 / unitToPixel;
         private List<PhysicsParticleObject> pList;
+
+
+        int[,] map = new int[,]
+            {
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,}
+
+
+            };
 
         
 
@@ -89,6 +115,7 @@ namespace Farseer331_Setup
             random = new Random();
 
 
+          
 
             pList = new List<PhysicsParticleObject>();
             
@@ -104,22 +131,22 @@ namespace Farseer331_Setup
             floorTexture = Content.Load<Texture2D>("floor");
 
 
-          
+/*          
             floor = new DrawablePhysicsObject(world, floorTexture, new Vector2(GraphicsDevice.Viewport.Width, floorTexture.Height), 1000);
             floor.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height - 50);
             floor.body.BodyType = BodyType.Static;
 
             wall = new DrawablePhysicsObject(world, floorTexture, new Vector2(floorTexture.Width, floorTexture.Height), 1000);
-            wall.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height - 400);
+            wall.Position = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height - 430);
             wall.body.FixedRotation = true;
-            wall.body.Rotation = 15.5f;
+            wall.body.Rotation = 0f;
             wall.body.BodyType = BodyType.Static;
             
 
             platform = new DrawablePhysicsObject(world, floorTexture, new Vector2(GraphicsDevice.Viewport.Width/2, floorTexture.Height), 1000);
             platform.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height / 2);
             platform.body.BodyType = BodyType.Static;
-            
+            */
 
             player = new DrawablePhysicsObject(world,null, new Vector2(36.0f, 48.0f), 1000);
           //  player = BodyFactory.CreateRectangle(world, 36*pixelToUnit, 48*pixelToUnit, 1f);
@@ -128,8 +155,11 @@ namespace Farseer331_Setup
             player.body.BodyType = BodyType.Dynamic;
             player.body.Friction = playerFriction;
            
+           
             
             crateList = new List<DrawablePhysicsObject>();
+            boxList = new List<DrawablePhysicsObject>();
+            florList = new List<DrawablePhysicsObject>();
 
             prevKeyboardState = Keyboard.GetState();
 
@@ -142,10 +172,13 @@ namespace Farseer331_Setup
        //     playerAnimation.Initialize(playerTexture, new Vector2(0, 0), 115, 69, 8, 30, Color.White, 1f, true);
             playerObj.Initialize(playerAnimation, new Vector2(player.Position.X, player.Position.Y));
 
+            
 
             List<Texture2D> textures = new List<Texture2D>();
             textures.Add(Content.Load<Texture2D>("white"));
             white = Content.Load<Texture2D>("white");
+
+            Createflor();
 
             particleEngine = new ParticleEngine(textures, new Vector2(playerObj.Position.X, playerObj.Position.Y), world);
 
@@ -176,6 +209,51 @@ namespace Farseer331_Setup
             crateList.Add(crate);
         }
 
+        private void CreateCrate()
+        {
+            DrawablePhysicsObject box;
+            box = new DrawablePhysicsObject(world, Content.Load<Texture2D>("Crate"), new Vector2(50.0f, 50.0f), 0.1f);
+            box.Position = new Vector2(box.Size.X + (boxList.Count * box.Size.X), GraphicsDevice.Viewport.Height - box.Size.Y);
+            box.body.BodyType = BodyType.Static;
+
+            boxList.Add(box);
+        }
+
+        private void Createflor()
+        {
+
+            int tileMapWidth = map.GetLength(1);
+            int tileMapHeight = map.GetLength(0);
+
+            for (int x = 0; x < tileMapWidth; x++)
+            {
+
+                for (int y = 0; y < tileMapHeight; y++)
+                {
+                    int textureIndex = map[y, x];
+
+                    DrawablePhysicsObject flor;
+
+                    if (textureIndex == 1)
+                    {
+
+                        flor = new DrawablePhysicsObject(world, Content.Load<Texture2D>("Crate"), new Vector2(51.0f, 50.0f), 0.1f);
+                        flor.Position = new Vector2(flor.Size.X + (x * (flor.Size.X-1)), flor.Size.Y + (y * flor.Size.Y));
+                        flor.body.BodyType = BodyType.Static;
+
+                        florList.Add(flor);
+                    }
+                    else
+                    {
+
+                     //   flor = new DrawablePhysicsObject(world, Content.Load<Texture2D>("white"), new Vector2(50.0f, 50.0f), 0.1f);
+
+                    }
+        
+                }
+            }
+        }
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -188,32 +266,66 @@ namespace Farseer331_Setup
             playerObj.Position.Y = player.Position.Y;
             playerObj.Update(gameTime);
             KeyboardState keyboardState = Keyboard.GetState();
+
             // Allows the game to exit
+
+            Console.WriteLine(player.body.Position.Y);
+
             if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) || (keyboardState.IsKeyDown(Keys.Escape)))
                 this.Exit();
 
-            if (keyboardState.IsKeyDown(Keys.Right)){
-                player.body.LinearVelocity += playerSpeed;
-                playerObj.Facing = "right";
+            if (player.body.LinearVelocity.X < maxVelocity.X)
+            {
 
-                if (player.body.LinearVelocity.X < 0)
+                if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    player.body.LinearVelocity += playerSpeed * 2;
+                    player.body.LinearVelocity += playerSpeed;
+                    playerObj.Facing = "right";
+
+                    if (player.body.LinearVelocity.X < 0)
+                    {
+                        player.body.LinearVelocity += playerSpeed * 4;
+                    }
                 }
             }
-            if (keyboardState.IsKeyDown(Keys.Left)){
-                player.body.LinearVelocity -= playerSpeed;
-                playerObj.Facing = "left";
-                if (player.body.LinearVelocity.X > 0)
+            if (player.body.LinearVelocity.X > -maxVelocity.X)
+            {
+                if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    player.body.LinearVelocity -= playerSpeed * 2;
+                    player.body.LinearVelocity -= playerSpeed;
+                    playerObj.Facing = "left";
+
+                    if (player.body.LinearVelocity.X > 0)
+                    {
+                        player.body.LinearVelocity -= playerSpeed * 4;
+                    }
                 }
+            }
+
+            if(player.body.Position.Y == prevPlayerY)
+            {
+                jumpAvailible = true;
             }
 
             
+
+            if (jumpAvailible == true)
+            {
+                if (keyboardState.IsKeyDown(Keys.Up))
+                {
+                    player.body.LinearVelocity -= playerJumpPower;
+                    jumpAvailible = false;
+                }
+            }
             if (keyboardState.IsKeyDown(Keys.Space)&& (!prevKeyboardState.IsKeyDown(Keys.Space)))
             {
                 player.body.LinearVelocity *= new Vector2(-1.0f, 0.0f);
+            }
+
+
+            if (keyboardState.IsKeyDown(Keys.Q) && (!prevKeyboardState.IsKeyDown(Keys.Q)))
+            {
+                Createflor();
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
@@ -226,10 +338,19 @@ namespace Farseer331_Setup
             if (keyboardState.IsKeyDown(Keys.D))
             {
 
-                cam.Pos += new Vector2(1f, 0f);
+                cam.Pos += new Vector2(10f, 0f);
                 
                 
             }
+
+               if (keyboardState.IsKeyDown(Keys.Y))
+            {
+
+
+                CreateCrate();
+                
+            }
+            
 
             if (keyboardState.IsKeyDown(Keys.A))
             {
@@ -265,6 +386,7 @@ namespace Farseer331_Setup
             }
 
             prevKeyboardState = keyboardState;
+            prevPlayerY = player.body.Position.Y;
 
 
             if ((playerObj.Position.X - cam._pos.X) > graphics.GraphicsDevice.Viewport.Width * 0.40)
@@ -304,15 +426,25 @@ namespace Farseer331_Setup
                 crate.Draw(spriteBatch, Color.Red);
             }
 
+            foreach (DrawablePhysicsObject box in boxList)
+            {
+                box.Draw(spriteBatch, Color.White);
+            }
+
+            foreach (DrawablePhysicsObject flor in florList)
+            {
+                flor.Draw(spriteBatch, Color.White);
+            }
+
             playerObj.Draw(spriteBatch, player.body.Rotation);
-            floor.Draw(spriteBatch, Color.White);
+          //  floor.Draw(spriteBatch, Color.White);
     //        spriteBatch.Draw(floorTexture,new Rectangle((int)floor.Position.X, (int)floor.Position.Y, (int)floorSize.X, (int)floorSize.Y), Color.White);
       //      spriteBatch.Draw(floorTexture, platform.Position, Color.White);
-            platform.Draw(spriteBatch, Color.White);
+       //     platform.Draw(spriteBatch, Color.White);
        //     Rectangle wallRect = new Rectangle((int)wall.Position.X, (int)wall.Position.Y, (int)wall.Size.X, (int)wall.Size.Y);
           //  spriteBatch.Draw(wall.texture, wallRect, null, Color.White, wall.body.Rotation, Vector2.Zero, SpriteEffects.None, 0);
-            wall.Draw(spriteBatch, Color.White);
-            Console.WriteLine(wall.body.Rotation);
+    //   //     wall.Draw(spriteBatch, Color.White);
+      //      Console.WriteLine(wall.body.Rotation);
         Console.WriteLine(crateList.Count);
     //        player.body.Draw(spriteBatch);
 
@@ -348,5 +480,7 @@ namespace Farseer331_Setup
 
         }
 
+
+       
     }
 }
